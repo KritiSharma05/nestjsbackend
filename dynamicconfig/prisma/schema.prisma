@@ -1,0 +1,22 @@
+// schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Define the datasources for both databases
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL_BASE")
+}
+
+
+// Define your User model
+model User {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  email      String    @unique
+  name       String?
+  birthYear  Int?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}
